@@ -79,9 +79,9 @@ export default function Home() {
             </div>
           </div>
           <div className="relative col-start-2 row-start-1 row-end-3 border-2 border-black p-2 flex place-items-center">
-            <a href={`https://www.pokemon.com/us/pokedex/${data.name}`} className="w-full hover:cursor-pointer">
+            <a href={`https://www.pokemon.com/us/pokedex/${data.name.toLowerCase()}`} className="w-full hover:cursor-pointer" target="_blank">
 
-            <img src={shiny ? data.picture:data.shiny} alt="pokemon" className="w-full h-full"/>
+            <img src={shiny ? data.shiny:data.picture} alt="pokemon" className="w-full aspect-square"/>
             </a>
             <img src={shiny ? "/shinyfull.png":"/shinyout.png"} alt="shiny icon" className="absolute bottom-1 right-1 w-8 hover:cursor-pointer" onClick={toggleShiny}/>
           </div>
