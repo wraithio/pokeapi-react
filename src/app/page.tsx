@@ -5,6 +5,7 @@ import { generatePokemonData } from "@/lib/services";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { PokemonData,AbilityTree,EvolTree } from "../../interfaces/interfaces";
+import { saveToLocalStorageByName } from "@/lib/localstorage";
 
 export default function Home() {
 
@@ -33,13 +34,9 @@ export default function Home() {
     setData(await generatePokemonData(search.split(" ").join("-")))
   }
 
-  const toggleShiny = () => {
-    if(shiny)
-    {
-      setShiny(false)
-    }else{
-      setShiny(true)
-    }
+  const addtoFavs = (name:string) =>
+  {
+    saveToLocalStorageByName(name);
   }
 
   return (
@@ -47,11 +44,11 @@ export default function Home() {
       <div className="flex flex-row justify-between">
         <div className="flex gap-3 place-items-center mb-2">
           <Input name="pokemon" onChange={(event) => setSearch(event.target.value)}/>
-          <Button variant="outline" onClick={() => displayData(search)}>Search</Button>
-          <Button className="text-md" variant="outline" onClick={() => displayData(String(Math.floor(Math.random() * 649) + 1))}>
+          <Button type="submit" className="cursor-pointer" variant="outline" onClick={() => displayData(search)}>Search</Button>
+          <Button type="submit" className="text-md cursor-pointer" variant="outline" onClick={() => displayData(String(Math.floor(Math.random() * 649) + 1))}>
             Randomize
           </Button>
-          <img src="/blackstar.png" alt="star icon" className="w-10 h-10" />
+          <img src="/blackstar.png" alt="star icon" className="w-10 h-10" onClick={addtoFavs(data.name.toLowerCase())}/>
         </div>
         <div className="flex gap-2">
           <h1 className="text-7xl">Pokedex</h1>
@@ -83,7 +80,7 @@ export default function Home() {
 
             <img src={shiny ? data.shiny:data.picture} alt="pokemon" className="w-full aspect-square"/>
             </a>
-            <img src={shiny ? "/shinyfull.png":"/shinyout.png"} alt="shiny icon" className="absolute bottom-1 right-1 w-8 hover:cursor-pointer" onClick={toggleShiny}/>
+            <img src={shiny ? "/shinyfull.png":"/shinyout.png"} alt="shiny icon" className="absolute bottom-1 right-1 w-8 cursor-pointer hover:text" onClick={() => setShiny(!shiny)}/>
           </div>
           <div className="row-start-3 text-2xl col-start-1 col-end-3 border-2 border-black p-2">
             <h2>Evolution Tree</h2>
