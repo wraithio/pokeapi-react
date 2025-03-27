@@ -16,6 +16,11 @@ export interface PokemonData {
     picture: string;
     shiny:string;
     moves: string[];
-    // evolTree: EvolTree[];
+    evolTree: EvolTree[];
     abilities:AbilityTree[];
+}
+
+export interface IFavorites{
+    name:string
+    image:string
 }

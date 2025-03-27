@@ -1,7 +1,7 @@
 function saveToLocalStorageByName(name:string) {
     if (typeof window === 'undefined') return; // Prevents error on server
 
-    let namesArr = getLocalStorage();
+    const namesArr = getLocalStorage();
 
     if (!namesArr.includes(name)) {
         namesArr.push(name);
@@ -13,7 +13,7 @@ function saveToLocalStorageByName(name:string) {
 function getLocalStorage() {
     if (typeof window === 'undefined') return []; // Prevents error on server
 
-    let localStorageData = localStorage.getItem('PokeFavs');
+    const localStorageData = localStorage.getItem('PokeFavs');
 
     if (localStorageData == null) {
         return [];
@@ -25,9 +25,9 @@ function getLocalStorage() {
 function removeFromLocalStorage(name:string) {
     if (typeof window === 'undefined') return; // Prevents error on server
 
-    let namesArr = getLocalStorage();
+    const namesArr = getLocalStorage();
 
-    let nameindex = namesArr.indexOf(name);
+    const nameindex = namesArr.indexOf(name);
 
     if (nameindex !== -1) {
         namesArr.splice(nameindex, 1);

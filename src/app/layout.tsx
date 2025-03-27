@@ -1,18 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Bubblegum_Sans } from "next/font/google";
 import "./globals.css";
-
- export const bubblegumSans = Bubblegum_Sans({
-  variable: "--font-bubblegum-sans",
-  subsets: ["latin"],
-  weight: "400"
-});
-
-export const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "PokeAPI",
@@ -26,8 +13,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head><link
+  rel="icon"
+  href="/favicon-32x32.png"
+  type="image/png"
+  sizes="32x32"
+/></head>
       <body
-        className={`${bubblegumSans.variable} antialiased bg-[url("/pokeBG.jpg")] bg-cover bg-no-repeat bg-center`}
+        className={`font-[Bubblegum] antialiased bg-[url("/pokeBG.jpg")] bg-cover bg-no-repeat bg-center`}
       >
         {children}
       </body>

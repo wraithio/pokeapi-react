@@ -3,6 +3,16 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: "Inter";
+  src: url(/fonts/Inter-VariableFont.ttf);
+}
+
+@font-face {
+  font-family: "Bubblegum";
+  src: url(/fonts/BubblegumSans-Regular.ttf);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -113,7 +123,7 @@
 }
 
 h4{
-  font-family: "Geist Mono",Arial, Helvetica, sans-serif;
+  font-family: "Inter",Arial, Helvetica, sans-serif;
 }
 
 @layer base {
