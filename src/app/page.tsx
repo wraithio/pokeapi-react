@@ -237,7 +237,7 @@ export default function Home() {
                       </h2>
                     </button>
                   </div>
-                  <hr className="my-1 sm:hidden block"/>
+                  <hr className="my-1 sm:hidden block" />
                 </div>
               ))}
             </div>

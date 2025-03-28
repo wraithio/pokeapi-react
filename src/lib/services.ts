@@ -32,14 +32,8 @@ const generatePokemonData = async (pokemon: string) => {
   if (!response.ok) alert("Invalid input... REMEMBER only Gen.I-V");
   const data = await response.json();
   if (data.id > 649) alert("Invalid input... REMEMBER only Gen.I-V");
-  const moveArr: string[] = [];
-  for (let i = 0; i < data.moves.length; i++) {
-    moveArr.push(formatString(data.moves[i].move.name));
-  }
-  const typeArr: string[] = [];
-  for (let i = 0; i < data.types.length; i++) {
-    typeArr.push(formatString(data.types[i].type.name));
-  }
+  const moveArr: string[] = data.moves.map((move: { move: { name: string } }) => formatString(move.move.name));
+  const typeArr: string[] = data.types.map((type:{type:{name:string}}) => formatString(type.type.name));
   const abilityArr: AbilityTree[] = [];
   for (let i = 0; i < data.abilities.length; i++) {
     const abilityResponse = await fetch(data.abilities[i].ability.url);
@@ -53,7 +47,6 @@ const generatePokemonData = async (pokemon: string) => {
     };
     abilityArr.push(abilityObj);
   }
-
   const locationResponse = await fetch(data.location_area_encounters);
   const locData = await locationResponse.json();
 
@@ -61,7 +54,6 @@ const generatePokemonData = async (pokemon: string) => {
   const speciesData = await speciesResponse.json();
 
   let evolArr: EvolTree[] = [];
-
   if (speciesData.evolves_from_species != null) {
     let response = await fetch(speciesData.evolves_from_species.url);
     let data = await response.json();
@@ -71,6 +63,7 @@ const generatePokemonData = async (pokemon: string) => {
       response = await fetch(data.evolves_from_species.url);
       data = await response.json();
     }
+
     evolArr.push({
       name: formatString(data.name),
       picture: await findPicturebyName(data.name),
@@ -85,6 +78,7 @@ const generatePokemonData = async (pokemon: string) => {
   const evolResponse = await fetch(speciesData.evolution_chain.url);
   const evolData = await evolResponse.json();
   let evolChain = evolData.chain;
+
   if (evolChain.evolves_to.length > 3) {
     for (let i = 0; i < evolChain.evolves_to.length; i++) {
       evolArr.push({
@@ -92,7 +86,8 @@ const generatePokemonData = async (pokemon: string) => {
         picture: await findPicturebyName(evolChain.evolves_to[i].species.name),
       });
     }
-  } else {
+  }
+   else {
     while (evolChain.evolves_to.length != 0) {
       evolChain = evolChain.evolves_to[0];
       evolArr.push({
@@ -104,7 +99,6 @@ const generatePokemonData = async (pokemon: string) => {
 
   if(evolArr.length == 1) evolArr = [{name:"N/A", picture:"#"}]
 
-  //   console.log(evolArr);
   const pokeData: PokemonData = {
     name: formatString(data.name),
     number: data.id,
@@ -135,4 +129,4 @@ const generateFavs = async () => {
   return favList;
 };
 
-export { generatePokemonData, generateFavs ,deformatString };
+export { generatePokemonData, generateFavs ,deformatString};
