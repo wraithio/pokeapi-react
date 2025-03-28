@@ -30,6 +30,8 @@ Requirements:
 
 ---
 
-github [here](https://github.com/wraithio/tip-calculator-app-main)
+github [here](https://github.com/wraithio/pokeapi-react)
 
-vercel [here](https://tip-calculator-app-main-omega-flame.vercel.app/)
+vercel [here](https://pokeapi-nextjs-beta.vercel.app/)
+
+figma [here](https://www.figma.com/design/blIQM5s6cOGD2Tn6jwKZIf/Pokemon?node-id=0-1&t=v91OebzCKbqQLozT-1)
