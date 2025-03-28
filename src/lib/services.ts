@@ -60,7 +60,7 @@ const generatePokemonData = async (pokemon: string) => {
   const speciesResponse = await fetch(data.species.url);
   const speciesData = await speciesResponse.json();
 
-  const evolArr: EvolTree[] = [];
+  let evolArr: EvolTree[] = [];
 
   if (speciesData.evolves_from_species != null) {
     let response = await fetch(speciesData.evolves_from_species.url);
@@ -102,6 +102,8 @@ const generatePokemonData = async (pokemon: string) => {
     }
   }
 
+  if(evolArr.length == 1) evolArr = [{name:"N/A", picture:"#"}]
+
   //   console.log(evolArr);
   const pokeData: PokemonData = {
     name: formatString(data.name),
@@ -112,7 +114,7 @@ const generatePokemonData = async (pokemon: string) => {
     location:
       locData.length != 0
         ? formatString(locData[0].location_area.name)
-        : "Unknown",
+        : "N/A",
     abilities: abilityArr,
     type: typeArr,
     evolTree: evolArr,

@@ -155,7 +155,7 @@ export default function Home() {
             <div className="flex justify-evenly lg:mt-4 sm:mt-12 mt-4 gap-3 overflow-x-auto">
               {/* evol tree div */}
               {data.evolTree.map((evolution, index) => (
-                <div className="flex flex-col gap-1 justify-center text-center hover:text-slate-500 cursor-pointer" key={index} onClick={() => displayData(evolution.name)}>
+                evolution.picture == "#" ? <div key={index}>{evolution.name}</div> : <div className="flex flex-col gap-1 justify-center text-center hover:text-slate-500 cursor-pointer" key={index} onClick={() => displayData(evolution.name)}>
                   <img src={evolution.picture} alt="" className="h-[100px] w-[100px]" />
                   <h2 className="sm:text-2xl text-sm">{evolution.name}</h2>
                 </div>
