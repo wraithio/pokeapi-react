@@ -183,7 +183,7 @@ export default function Home() {
             <div className="overflow-y-auto lg:h-48 sm:h-44 h-24 sm:border-0 border-1 rounded-sm sm:p-0 p-2">
               {/* moves div */}
               {data.moves.map((move, index) => (
-                <a href={`https://pokemondb.net/move/${deformatString(move)}`} className="hover:text-slate-500" key={index}>
+                <a href={`https://pokemondb.net/move/${deformatString(move)}`} className="hover:text-slate-500" target="_blank" key={index}>
                 <h3 className="sm:text-xl">
                   {move}
                 </h3>
