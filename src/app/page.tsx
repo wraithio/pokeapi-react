@@ -12,6 +12,7 @@ import {
   removeFromLocalStorage,
   saveToLocalStorageByName,
 } from "@/lib/localstorage";
+import AbilityComponent from "@/components/AbilityComponent";
 
 export default function Home() {
   const [search, setSearch] = useState<string>("");
@@ -186,10 +187,11 @@ export default function Home() {
             <div className="overflow-y-auto lg:h-52 sm:h-48 h-64 sm:border-0 border-1 rounded-sm sm:p-0 p-2">
               {/* abilities div */}
               {data.abilities.map((ability, index) => (
-                <div key={index}>
-                  <h2 className="sm:text-2xl text-lg">{ability.name}</h2>
-                  <h4 className="sm:text-sm text-xs">{ability.description}</h4>
-                </div>
+                // <div key={index}>
+                //   <h2 className="sm:text-2xl text-lg">{ability.name}</h2>
+                //   <h4 className="sm:text-sm text-xs">{ability.description}</h4>
+                // </div>
+                <AbilityComponent key={index} name={ability.name} description={ability.description}/>
               ))}
             </div>
           </div>
