@@ -31,7 +31,22 @@ const generatePokemonData = async (pokemon: string) => {
   });
   if (!response.ok) alert("Invalid input... REMEMBER only Gen.I-V");
   const data = await response.json();
-  if (data.id > 649) alert("Invalid input... REMEMBER only Gen.I-V");
+  if (data.id > 649)
+    {
+      alert("Invalid input... REMEMBER only Gen.I-V");
+      const pokeData: PokemonData = {
+        name: "",
+        number: 0,
+        picture: "#",
+        shiny: "#",
+        moves: [],
+        location:"N/A",
+        abilities: [],
+        type: [],
+        evolTree: [],
+      };
+      return pokeData
+    }  
   const moveArr: string[] = data.moves.map((move: { move: { name: string } }) => formatString(move.move.name));
   const typeArr: string[] = data.types.map((type:{type:{name:string}}) => formatString(type.type.name));
   const abilityArr: AbilityTree[] = [];
