@@ -1,7 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { deformatString, generateFavs, generatePokemonData } from "@/lib/services";
+import {
+  deformatString,
+  generateFavs,
+  generatePokemonData,
+} from "@/lib/services";
 import { useEffect, useState } from "react";
 import { PokemonData, IFavorites } from "../../interfaces/interfaces";
 import {
@@ -49,7 +53,7 @@ export default function Home() {
       setFav(await generateFavs());
     };
     callFavs();
-    displayData(String(Math.floor(Math.random() * 649) + 1))
+    displayData(String(Math.floor(Math.random() * 649) + 1));
   }, []);
 
   return (
@@ -154,16 +158,28 @@ export default function Home() {
             <h2>Evolution Tree</h2>
             <div className="flex justify-evenly lg:mt-4 sm:mt-12 mt-4 gap-3 overflow-x-auto">
               {/* evol tree div */}
-              {data.evolTree.map((evolution, index) => (
-                evolution.picture == "#" ? <div key={index}>{evolution.name}</div> : <div className="flex flex-col gap-1 justify-center text-center hover:text-slate-500 cursor-pointer" key={index} onClick={() => displayData(evolution.name)}>
-                  <img src={evolution.picture} alt="" className="h-[100px] w-[100px]" />
-                  <h2 className="sm:text-2xl text-sm">{evolution.name}</h2>
-                </div>
-              ))}
+              {data.evolTree.map((evolution, index) =>
+                evolution.picture == "#" ? (
+                  <div key={index}>{evolution.name}</div>
+                ) : (
+                  <div
+                    className="flex flex-col gap-1 justify-center text-center hover:text-slate-500 cursor-pointer"
+                    key={index}
+                    onClick={() => displayData(evolution.name)}
+                  >
+                    <img
+                      src={evolution.picture}
+                      alt=""
+                      className="h-[100px] w-[100px]"
+                    />
+                    <h2 className="sm:text-2xl text-sm">{evolution.name}</h2>
+                  </div>
+                )
+              )}
             </div>
           </div>
         </div>
-        <div className="grid sm:grid-rows-2 grid-rows-[290px_160px_110px] grid-cols-3 sm:gap-3">
+        <div className="grid sm:grid-rows-2 grid-rows-[290px_160px_160px] grid-cols-3 sm:gap-3">
           <div className="sm:border-2 border-black sm:p-2 col-start-1 col-end-4">
             <h2 className="text-2xl">Abilities</h2>
 
@@ -180,41 +196,48 @@ export default function Home() {
           <div className="sm:border-2 border-black sm:p-2 col-start-1 sm:col-end-2 col-end-4">
             <h2 className="text-2xl">Moves</h2>{" "}
             <h4 className="sm:text-lg text-xs">({data.moves.length})</h4>
-            <div className="overflow-y-auto lg:h-48 sm:h-44 h-24 sm:border-0 border-1 rounded-sm sm:p-0 p-2">
+            <div className="overflow-y-auto lg:h-48 sm:h-44 h-28 sm:border-0 border-1 rounded-sm sm:p-0 p-2">
               {/* moves div */}
               {data.moves.map((move, index) => (
-                <a href={`https://pokemondb.net/move/${deformatString(move)}`} className="hover:text-slate-500" target="_blank" key={index}>
-                <h3 className="sm:text-xl">
-                  {move}
-                </h3>
-                <hr className="lg:hidden block"/>
+                <a
+                  href={`https://pokemondb.net/move/${deformatString(move)}`}
+                  className="hover:text-slate-500"
+                  target="_blank"
+                  key={index}
+                >
+                  <h3 className="sm:text-xl">{move}</h3>
+                  <hr className="lg:hidden block" />
                 </a>
               ))}
             </div>
           </div>
           <div className="sm:border-2 border-black sm:p-2 sm:col-start-2 col-start-1 sm:row-start-2 row-start-3 col-end-4">
             <h2 className="text-2xl">Favorites</h2>
-            <div className="sm:overflow-y-auto overflow-y-visible overflow-x-auto sm:h-48 h-18 flex sm:flex-col flex-row sm:justify-normal justify-center gap-3 sm:border-0 border-1 rounded-sm sm:p-0 p-2">
+            <div className="sm:overflow-y-auto overflow-y-visible overflow-x-auto sm:h-48 h-28 flex flex-col sm:justify-normal justify-center sm:gap-3 gap-1 sm:border-0 border-1 rounded-sm sm:p-2 p-1">
               {/* favorites div */}
               {fav.map((favorite, index) => (
-                <div
-                  className="flex sm:justify-between place-items-center sm:gap-0 gap-2 sm:mx-3"
-                  key={index}
-                >
-                  <div
-                    className="flex md:flex-row flex-col lg:gap-2 place-items-center cursor-pointer hover:text-slate-500"
-                    onClick={() => displayData(favorite.name.toLowerCase())}
-                  >
-                    <img
-                      src={favorite.image}
-                      alt={favorite.name}
-                      className="w-[60px] h-[60px]"
-                    />
-                    <h3 className="text-xl sm:block hidden">{favorite.name}</h3>
+                <div key={index}>
+                  <div className="flex sm:justify-between justify-around sm:place-items-center sm:gap-0 gap-2 mx-3">
+                    <div
+                      className="flex md:flex-row flex-col lg:gap-2 place-items-center cursor-pointer hover:text-slate-500"
+                      onClick={() => displayData(favorite.name.toLowerCase())}
+                    >
+                      <img
+                        src={favorite.image}
+                        alt={favorite.name}
+                        className="sm:w-[60px] sm:h-[60px] h-[40px] w-[40px]"
+                      />
+                      <h3 className="text-xl sm:block hidden">
+                        {favorite.name}
+                      </h3>
+                    </div>
+                    <button onClick={() => removeFav(favorite.name)}>
+                      <h2 className="sm:text-2xl text-3xl hover:text-red-500">
+                        X
+                      </h2>
+                    </button>
                   </div>
-                  <button onClick={() => removeFav(favorite.name)}>
-                    <h2 className="sm:text-2xl hover:text-red-500">X</h2>
-                  </button>
+                  <hr className="my-1 sm:hidden block"/>
                 </div>
               ))}
             </div>
@@ -222,8 +245,7 @@ export default function Home() {
         </div>
       </div>
       <div className="flex justify-end">
-      <h4 className="text-xs">created by: Aaron Robinson</h4>
-
+        <h4 className="text-xs">created by: Aaron Robinson</h4>
       </div>
     </div>
   );
