@@ -25,7 +25,8 @@ Requirements:
     Fully Responsive using Tailwind CSS https://tailwindcss.com
     Have a Prototype in Figma (Desktop, Tablet, Mobile)
 
-    Peer Review: 
+    Peer Review: Karen Cadavos
+    Your project is solid and fully functional! I like how you used an interface for the pokemon data which I didn't think when I was doing mine so good job! My only comment is that you could have used components but I think it's all up to you if you want to implement it without it! :) 
 
 
 ---
